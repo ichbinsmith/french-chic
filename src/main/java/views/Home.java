@@ -1,23 +1,16 @@
 package views;
 
 import business.entities.Client;
-import controller.Session;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import business.entities.Product;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class Home extends JFrame {
-    public Home(Client c) throws HeadlessException {
-        this.setTitle("French Chic - Login");
+    public Home(Client c, Product p) throws HeadlessException {
+        this.setTitle("French Chic - Produit du jour");
         this.setSize(650, 500);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -27,20 +20,66 @@ public class Home extends JFrame {
         this.setContentPane(accueilPanel);
         this.setLayout(null);
 
-        JLabel title = new JLabel("Home Page");
+        JLabel title = new JLabel("French Chic");
         title.setLocation(150, 50);
         title.setSize(1000, 100);
         Font f = new Font("", Font.PLAIN, 70);
         title.setFont(f);
         title.setForeground(Color.MAGENTA);
 
-        JLabel clientNameLabel = null;
+        JLabel bonjourTexte = null;
+        JLabel produitDuJourTexte = null;
+        JLabel quantiteLabel = null;
 
-        clientNameLabel = new JLabel(c.toString());
-        clientNameLabel.setSize(120, 20);
-        clientNameLabel.setLocation(150, 200);
+        String bonjourTxt = "Bonjour " + c.getFirstName() + " " + c.getLastName();
+        bonjourTexte = new JLabel(bonjourTxt);
+        bonjourTexte.setSize(250, 20);
+        bonjourTexte.setLocation(150, 200);
+
+        String produitTxt = "Le produit du jour est le \"" + p.getName() + "\" au prix de " + p.getPrice() + " Euros";
+        produitDuJourTexte = new JLabel(produitTxt);
+        produitDuJourTexte.setSize(500, 20);
+        produitDuJourTexte.setLocation(150, 250);
+
+        quantiteLabel = new JLabel("Quantite");
+        quantiteLabel.setSize(120, 20);
+        quantiteLabel.setLocation(250, 325);
+
+        int longueur = 200;
+        int largeur = 30;
+
+        final JTextField quantiteField;
+
+        quantiteField = new JTextField();
+        quantiteField.setSize(longueur, largeur);
+        quantiteField.setLocation(320, 320);
+        quantiteField.setSize(50, largeur);
+
+        JButton ajouterProduit = new JButton("Ajouter le produit du jour au panier");
+        ajouterProduit.setLocation(250, 370);
+        ajouterProduit.setSize(longueur, largeur);
+
+        ajouterProduit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                // TODO Auto-generated method stub
+                /*
+                Integer intg = new Integer(quantiteField.getText());
+                TraiterAjoutPanierReponse reponse = laSession.traiterAjoutPanier(produit, intg);
+                this.setVisible(false);
+                if (reponse.typeEcran == EnumTypeEcran.ECRAN_PANIER) {
+                    afficherEcranPanier(reponse.laCommande);
+                }
+
+                 */
+            }
+        });
 
         this.add(title);
-        this.add(clientNameLabel);
+        this.add(bonjourTexte);
+        this.add(produitDuJourTexte);
+        this.add(quantiteField);
+        this.add(quantiteLabel);
+        this.add(ajouterProduit);
     }
 }

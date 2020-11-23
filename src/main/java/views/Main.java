@@ -1,6 +1,7 @@
 package views;
 
 import business.entities.Client;
+import business.entities.Product;
 import controller.Session;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,8 @@ public class Main {
 
     public static void main(String[] args) {
         session = new Session();
-        loadLoginPage();
+        if(session.processStartUp().equals("loginFrame"))
+            loadLoginPage();
     }
 
     private static void loadLoginPage() {
@@ -20,9 +22,9 @@ public class Main {
         currentFrame.setVisible(true);
     }
 
-    static void loadHomePage(Client client) {
+    static void loadHomePage(Client client, Product product) {
         currentFrame.setVisible(false);
-        currentFrame = new Home(client);
+        currentFrame = new Home(client, product);
         currentFrame.setVisible(true);
     }
 }

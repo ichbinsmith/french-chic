@@ -1,8 +1,9 @@
 package views;
 
 import business.entities.Client;
+import business.entities.Product;
 import controller.Session;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -63,9 +64,9 @@ public class Login extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Session session = new Session();
-                ImmutablePair<Client,String> pair =  session.processLogin(pseudoField.getText(),String.valueOf(mdpField.getPassword()));
-                if (pair!=null){
-                    Main.loadHomePage(pair.getLeft());
+                ImmutableTriple<Client, Product, String> pair =  session.processLogin(pseudoField.getText(),String.valueOf(mdpField.getPassword()));
+                if (pair!=null && pair.getRight().equals("homeFrame")){
+                    Main.loadHomePage(pair.getLeft(),pair.getMiddle());
                 }
             }
         });
