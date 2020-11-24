@@ -30,6 +30,7 @@ public class Home extends JFrame {
         JLabel bonjourTexte = null;
         JLabel produitDuJourTexte = null;
         JLabel quantiteLabel = null;
+        JLabel stockLabel = null;
 
         String bonjourTxt = "Bonjour " + c.getFirstName() + " " + c.getLastName();
         bonjourTexte = new JLabel(bonjourTxt);
@@ -41,7 +42,12 @@ public class Home extends JFrame {
         produitDuJourTexte.setSize(500, 20);
         produitDuJourTexte.setLocation(150, 250);
 
-        quantiteLabel = new JLabel("Quantite");
+        String stock = "Quantité en stock : " + p.getStock();
+        stockLabel = new JLabel(stock);
+        stockLabel.setSize(500, 20);
+        stockLabel.setLocation(150, 270);
+
+        quantiteLabel = new JLabel("Quantité");
         quantiteLabel.setSize(120, 20);
         quantiteLabel.setLocation(250, 325);
 
@@ -57,7 +63,7 @@ public class Home extends JFrame {
 
         JButton ajouterProduit = new JButton("Ajouter le produit du jour au panier");
         ajouterProduit.setLocation(250, 370);
-        ajouterProduit.setSize(longueur, largeur);
+        ajouterProduit.setSize(longueur+40, largeur);
 
         ajouterProduit.addActionListener(new ActionListener() {
             @Override
@@ -81,5 +87,6 @@ public class Home extends JFrame {
         this.add(quantiteField);
         this.add(quantiteLabel);
         this.add(ajouterProduit);
+        this.add(stockLabel);
     }
 }

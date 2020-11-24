@@ -12,6 +12,7 @@ public class Main {
     static JFrame currentFrame;
 
     public static void main(String[] args) {
+        System.setProperty("file.encoding","UTF-8");
         session = new Session();
         if(session.processStartUp().equals("loginFrame"))
             loadLoginPage();

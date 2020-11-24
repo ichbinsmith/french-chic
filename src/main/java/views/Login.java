@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 public class Login extends JFrame {
     public Login() throws HeadlessException {
-        this.setTitle("French Chic - Login");
+        this.setTitle("French Chic - Connexion");
         this.setSize(650, 500);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -33,6 +33,12 @@ public class Login extends JFrame {
         Font f = new Font("", Font.PLAIN, 70);
         title.setFont(f);
         title.setForeground(Color.MAGENTA);
+
+        JLabel errorMessage = new JLabel("");
+        errorMessage.setLocation(270,182);
+        errorMessage.setForeground(Color.RED);
+        errorMessage.setFont(new Font("",Font.PLAIN,10));
+        errorMessage.setSize(200, 20);
 
         JLabel pseudoLabel = null;
         JLabel mdpLabel = null;
@@ -68,6 +74,12 @@ public class Login extends JFrame {
                 if (pair!=null && pair.getRight().equals("homeFrame")){
                     Main.loadHomePage(pair.getLeft(),pair.getMiddle());
                 }
+                else{
+                    //clear pseudo and password field
+                    pseudoField.setText("");
+                    mdpField.setText("");
+                    errorMessage.setText("Pseudo ou mot passe invalide");
+                }
             }
         });
         this.add(title);
@@ -76,5 +88,6 @@ public class Login extends JFrame {
         this.add(pseudoField);
         this.add(mdpField);
         this.add(login);
+        this.add(errorMessage);
     }
 }
