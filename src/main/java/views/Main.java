@@ -1,6 +1,7 @@
 package views;
 
 import business.entities.Client;
+import business.entities.Order;
 import business.entities.Product;
 import controller.Session;
 import javax.swing.*;
@@ -26,6 +27,12 @@ public class Main {
     static void loadHomePage(Client client, Product product) {
         currentFrame.setVisible(false);
         currentFrame = new Home(client, product);
+        currentFrame.setVisible(true);
+    }
+
+    static void loadOrderPage(business.entities.Order order) {
+        currentFrame.setVisible(false);
+        currentFrame = new views.Order(order);
         currentFrame.setVisible(true);
     }
 }

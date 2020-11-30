@@ -2,6 +2,7 @@ package views;
 
 import business.entities.Client;
 import business.entities.Product;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -68,19 +69,14 @@ public class Home extends JFrame {
         ajouterProduit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub
-                /*
-                Integer intg = new Integer(quantiteField.getText());
-                TraiterAjoutPanierReponse reponse = laSession.traiterAjoutPanier(produit, intg);
-                this.setVisible(false);
-                if (reponse.typeEcran == EnumTypeEcran.ECRAN_PANIER) {
-                    afficherEcranPanier(reponse.laCommande);
-                }
 
-                 */
+                Integer quantity = new Integer(quantiteField.getText());
+                ImmutablePair response = Main.session.processProductAddition(p, quantity);
+                if (response.getRight().equals("orderFrame") && response.getLeft()!=null ) {
+                    Main.loadOrderPage((business.entities.Order) response.getLeft());
+                }
             }
         });
-
         this.add(title);
         this.add(bonjourTexte);
         this.add(produitDuJourTexte);
