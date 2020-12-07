@@ -1,14 +1,34 @@
 package business.entities;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-public class Order {
-    ArrayList<OrderItem> items;
+
+@Entity
+@Table(name = "order")
+public class Order implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="client_id")
     Client client;
+
+
+    //@OneToMany(mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "order_id")
+    List<OrderItem> items;
+
+    @Column(name = "OrderPrice")
     float price;
+
+    public Order() {
+    }
 
     public Order(ArrayList<OrderItem> items, Client client) {
         this.items = items;
@@ -16,7 +36,7 @@ public class Order {
         updatePrice();
     }
 
-    public ArrayList<OrderItem> getItems() {
+    public List<OrderItem> getItems() {
         return items;
     }
 

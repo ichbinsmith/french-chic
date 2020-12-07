@@ -1,18 +1,37 @@
 package business.entities;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
-//import javax.persistence.Column;
-//import javax.persistence.Embeddable;
-//import java.util.Objects;
-
-//@Embeddable
+@Entity
+@Table(name = "client")
 public class Client implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "ClientFirstName")
     private String firstName;
+
+    @Column(name = "ClientLastName")
     private String lastName;
+
+    @Column(name = "ClientPseudo")
     private String pseudo;
+
+    @Column(name = "ClientPassword")
     private String password;
+
+    /*normalUser vs adminUser*/
+    @Column(name = "ClientType")
+    private String clientType;
+
+    /*
+    @OneToMany(mappedBy = "client")
+    @JoinColumn(name = "ClientOrders")
+    List<Order> orders;
+    */
+
 
     public Client() {
     }
@@ -20,6 +39,7 @@ public class Client implements Serializable {
     public Client(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.clientType = "normalUser";
     }
 
     public Client(String firstName, String lastName, String pseudo, String password) {
@@ -27,9 +47,21 @@ public class Client implements Serializable {
         this.lastName = lastName;
         this.pseudo = pseudo;
         this.password = password;
+        this.clientType = "normalUser";
     }
 
-    //@Column(name = "ClientFirstName")
+    public Client(String firstName, String lastName, String pseudo, String password, String clientType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pseudo = pseudo;
+        this.password = password;
+        this.clientType = clientType;
+    }
+
+    public int getId(){return id;}
+    public void setId(int id){this.id=id;}
+
+
     public String getFirstName() {
         return firstName;
     }
@@ -37,7 +69,6 @@ public class Client implements Serializable {
         this.firstName = firstName;
     }
 
-    //@Column(name = "ClientLastName")
     public String getLastName() {
         return lastName;
     }
@@ -45,7 +76,6 @@ public class Client implements Serializable {
         this.lastName = lastName;
     }
 
-    //@Column(name = "ClientPseudo")
     public String getPseudo() {
         return pseudo;
     }
@@ -53,7 +83,6 @@ public class Client implements Serializable {
         this.pseudo = pseudo;
     }
 
-    //@Column(name = "ClientPassword")
     public String getPassword() {
         return password;
     }
@@ -65,4 +94,14 @@ public class Client implements Serializable {
     public String toString() {
         return "Client " + getFirstName() + " " + getLastName();
     }
+
+    public String getClientType() {return clientType;}
+
+    public void setClientType(String clientType) {this.clientType = clientType;}
+
+    /*
+    public List<Order> getOrders() {return orders;}
+
+    public void setOrders(List<Order> orders) {this.orders = orders;}
+     */
 }
