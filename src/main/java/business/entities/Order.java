@@ -1,6 +1,7 @@
 package business.entities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "order")
+@Table(name = "orderTable")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,7 @@ public class Order implements Serializable {
 
 
     //@OneToMany(mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
+    @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "order_id")
     List<OrderItem> items;
