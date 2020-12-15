@@ -10,12 +10,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "orderTable")
+@NamedQueries({
+        @NamedQuery(name = "Order.findAll", query = "SELECT c FROM Order c"),
+        @NamedQuery(name = "Order.findById", query = "SELECT c FROM Order c WHERE c.id = :id")})
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="client_id")
     Client client;
 
@@ -30,6 +33,7 @@ public class Order implements Serializable {
     float price;
 
     public Order() {
+
     }
 
     public Order(ArrayList<OrderItem> items, Client client) {
@@ -95,4 +99,6 @@ public class Order implements Serializable {
             }
         }
     }
+
+
 }

@@ -71,6 +71,8 @@ public class Login extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Session session = new Session();
                 ImmutableTriple<Client, Product, String> pair =  session.processLogin(pseudoField.getText(),String.valueOf(mdpField.getPassword()));
+                System.out.println(pair.getLeft());
+                System.out.println(pair.getMiddle());
                 if (pair!=null && pair.getRight().equals("homeFrame")){
                     Main.loadHomePage(pair.getLeft(),pair.getMiddle());
                 }

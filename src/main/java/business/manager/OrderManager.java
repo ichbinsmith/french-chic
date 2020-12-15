@@ -5,17 +5,38 @@ import business.entities.Order;
 import business.entities.OrderItem;
 import business.entities.Product;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class OrderManager {
-    ArrayList<Order> orders;
+    List<Order> orders;
 
     public OrderManager() {
         this.init();
     }
+    public void initBD(){
+        EntityManagerFactory emf= Persistence.createEntityManagerFactory("fc_persistence_unit");
+        EntityManager em = emf.createEntityManager();
+        Client client =new Client("Paul","Koffi","pk","pk");
+
+        ArrayList<OrderItem> items = new ArrayList<>();
+        items.add(new OrderItem(new Product("Nike Air 270", (float) 230, 10), 5));
+        Order order = new Order(items,client);
+        em.persist(order);
+        em.getTransaction() .begin() ;
+        em.getTransaction() .commit() ;
+        init();
+
+    }
     private void init() {
-        ArrayList<Order> orderList = new ArrayList<>();
-        this.orders = orderList;
+        EntityManagerFactory emf= Persistence.createEntityManagerFactory("fc_persistence_unit");
+        EntityManager em = emf.createEntityManager();
+        this.orders = new ArrayList<>();
+        this.orders = (List<Order>) em.createNamedQuery("Order.findAll", Order.class).getResultList();
     }
 
     public void addOrder(Order o){
@@ -36,7 +57,30 @@ public class OrderManager {
     }
 
     public boolean validateOrder(Order order){
-        /*Add order to DB & decrease its products stocks*/
-        return true;
+        EntityManagerFactory emf= Persistence.createEntityManagerFactory("fc_persistence_unit");
+        EntityManager em = emf.createEntityManager();
+        //TODO : add try catch, process the DB constraint errors
+        System.out.println(order);
+        try {
+            //Update stocks
+            Iterator it = order.getItems().iterator();
+            em.getTransaction() .begin() ;
+            while (it.hasNext()){
+                OrderItem ot = (OrderItem) it.next();
+                ot.getProduct().setStock(ot.getProduct().getStock()-ot.getQuantity());
+            }
+            em.getTransaction() .commit() ;
+            em.persist(order);
+            em.getTransaction() .begin() ;
+            em.getTransaction() .commit() ;
+            return true;
+        }
+        catch(Exception e) {
+            return false;
+        }
+    }
+    public List<Order> getOrders() {
+        init();
+        return orders;
     }
 }

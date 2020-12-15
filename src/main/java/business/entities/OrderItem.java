@@ -11,7 +11,7 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="Product_id")
     private Product product;
 
@@ -32,7 +32,11 @@ public class OrderItem {
 
     public OrderItem(Product product, int quantity) {
         this.product = product;
-        this.price = product.getPrice()*quantity;
+        if (product.isPromotional()){
+            this.price = product.getPrice()*(1-product.getReduction())*quantity;
+        }else{
+            this.price = product.getPrice()*quantity;
+        }
         this.quantity = quantity;
     }
 

@@ -5,6 +5,10 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "product")
+@NamedQueries({
+        @NamedQuery(name = "Product.findAll", query = "SELECT c FROM Product c"),
+        @NamedQuery(name = "Product.findById", query = "SELECT c FROM Product c WHERE c.id = :id"),
+        @NamedQuery(name = "Product.findByName", query = "SELECT c FROM Product c WHERE c.name = :name")})
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -107,4 +111,13 @@ public class Product implements Serializable {
     public OrderItem getOrderItem() {return orderItem;}
 
     public void setOrderItem(OrderItem orderItem) {this.orderItem = orderItem; }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                '}';
+    }
 }
