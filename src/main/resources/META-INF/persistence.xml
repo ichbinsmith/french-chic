@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="fc_persistence_unit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+       <!-- <jta-data-source>FCDataSource</jta-data-source>-->
+
+        <class>business.entities.Order</class>
+        <class>business.entities.Client</class>
+        <class>business.entities.Product</class>
+        <class>business.entities.OrderItem</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <!--
+        <properties>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+            <property name="openjpa.RuntimeUnenhancedClasses" value="unsupported" />
+
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://postgresql-french-chic.alwaysdata.net:5432/french-chic_database"/>
+            <property name="javax.persistence.jdbc.user" value="french-chic"/>
+            <property name="javax.persistence.jdbc.password" value="QD@tbz@JpqKF!57"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+
+        </properties>
+
+        -->
+        <properties>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+            <property name="openjpa.RuntimeUnenhancedClasses" value="unsupported" />
+
+            <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://mysql-french-chic.alwaysdata.net:3306/french-chic_database"/>
+            <property name="javax.persistence.jdbc.user" value="220758"/>
+            <property name="javax.persistence.jdbc.password" value="QD@tbz@JpqKF!57"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+
+            <!--
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            -->
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
