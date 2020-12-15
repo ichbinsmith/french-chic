@@ -76,6 +76,9 @@ public class Login extends JFrame {
                 if (pair!=null && pair.getRight().equals("homeFrame")){
                     Main.loadHomePage(pair.getLeft(),pair.getMiddle());
                 }
+                else if (pair!=null && pair.getRight().equals("AdminHomeFrame")){
+                    Main.loadAdminHomePage(pair.getLeft());
+                }
                 else{
                     //clear pseudo and password field
                     pseudoField.setText("");

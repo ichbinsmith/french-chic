@@ -11,6 +11,7 @@ import javax.swing.*;
 
 public class Home extends JFrame {
     public Home(Client c, Product p) throws HeadlessException {
+        System.setProperty("file.encoding","UTF-8");
         this.setTitle("French Chic - Produit du jour");
         this.setSize(650, 500);
         this.setLocationRelativeTo(null);

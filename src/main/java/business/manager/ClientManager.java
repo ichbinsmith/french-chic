@@ -53,7 +53,6 @@ public class ClientManager {
         EntityManagerFactory emf= Persistence.createEntityManagerFactory("fc_persistence_unit");
         EntityManager em = emf.createEntityManager();
         try {
-            em.getTransaction() .commit() ;
             em.persist(c);
             em.getTransaction() .begin() ;
             em.getTransaction() .commit() ;

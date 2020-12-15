@@ -71,7 +71,6 @@ public class Order extends JFrame {
         addPromotional.setSize(200, 30);
 
 
-
         JLabel montantLabel = null;
         montantLabel = new JLabel("Montant panier");
         montantLabel.setSize(120, 20);
@@ -136,6 +135,5 @@ public class Order extends JFrame {
         this.add(montantField);
         this.add(montantLabel);
         this.add(paneTab);
-
     }
 }

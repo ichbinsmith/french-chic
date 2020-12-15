@@ -48,4 +48,21 @@ public class Main {
         currentFrame = new views.Order(order);
         currentFrame.setVisible(true);
     }
+
+    static void loadAdminHomePage(Client c){
+        currentFrame.setVisible(false);
+        currentFrame = new views.AdminHome(c);
+        currentFrame.setVisible(true);
+    }
+    static void loadProductAdditionPage(){
+        currentFrame.setVisible(false);
+        currentFrame = new views.ProductAddition();
+        currentFrame.setVisible(true);
+
+    }
+    static void loadClientAdditionPage(){
+        currentFrame.setVisible(false);
+        currentFrame = new views.ClientAddition();
+        currentFrame.setVisible(true);
+    }
 }

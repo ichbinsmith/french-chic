@@ -27,8 +27,11 @@ public class Session {
         Client c = clientManager.getClient(pseudo,password);
         client = c;
         Product p = productManager.getTodaySpecial();
-        if(c!=null)
-            return new ImmutableTriple<>(c,p,"homeFrame");
+        if(c!=null){
+            if(c.getClientType().equals("normalUser"))
+                return new ImmutableTriple<>(c,p,"homeFrame");
+            return new ImmutableTriple<>(c,p,"AdminHomeFrame");
+        }
         return null;
     }
 
